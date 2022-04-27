@@ -1,0 +1,15 @@
+{
+    "name": "Product.ILRuntimeTest",
+    "references": [
+        "GUID:f5139afb583722147beb0299c950c62b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
