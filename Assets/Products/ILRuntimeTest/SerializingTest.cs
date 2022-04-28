@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Assets.ILRuntimeShell;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Products.ILRuntimeTest
 {
-    [ExecuteInEditMode]
+    //[ExecuteInEditMode]
     public class SerializingTest : MonoBehaviour
     {
         public List<int> aaa;
@@ -13,6 +14,8 @@ namespace Assets.Products.ILRuntimeTest
         // Use this for initialization
         private void Start()
         {
+            ILAPP app = ILAPP.GetInstance();
+            print("helllodddddddddddddddddd");
         }
 
         // Update is called once per frame
@@ -23,7 +26,7 @@ namespace Assets.Products.ILRuntimeTest
         [ExecuteInEditMode]
         private void OnEnable()
         {
-            Test();
+            //Test();
         }
 
         private void Test()

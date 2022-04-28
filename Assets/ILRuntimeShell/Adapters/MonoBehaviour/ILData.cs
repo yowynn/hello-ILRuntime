@@ -10,10 +10,6 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
 {
     public enum ILDataTag
     {
-        PlaceHolder = -100,
-        Other = -3,
-        Array = -2,
-
         #region UnityEditor.SerializedPropertyType
 
         Generic = -1,
@@ -44,6 +40,10 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
         ManagedReference = 24,
 
         #endregion UnityEditor.SerializedPropertyType
+
+        Array = 1001,
+        PlaceHolder = 1000,
+        Other = 1002,
     }
 
     [Serializable]
@@ -98,9 +98,9 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
             (Curves = Curves ?? new List<AnimationCurve>()).Clear();
         }
 
-        public ILDataNode AddNode(string name = "")
+        public ILDataNode AddNode(string name = "", ILDataTag tag = ILDataTag.PlaceHolder)
         {
-            var node = new ILDataNode { Name = name };
+            var node = new ILDataNode { Name = name, Tag = tag };
             Nodes.Add(node);
             return node;
         }
