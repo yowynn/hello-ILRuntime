@@ -1,0 +1,41 @@
+
+jishu.png
+size: 86,86
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+jishuban_1
+  rotate: false
+  xy: 2, 9
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+jishuban_2
+  rotate: true
+  xy: 59, 19
+  size: 17, 11
+  orig: 18, 15
+  offset: 0, 1
+  index: -1
+jishuban_3
+  rotate: false
+  xy: 31, 11
+  size: 26, 25
+  orig: 27, 25
+  offset: 0, 0
+  index: -1
+shuzi9
+  rotate: false
+  xy: 54, 38
+  size: 30, 46
+  orig: 30, 46
+  offset: 0, 0
+  index: -1
+shuzi_10
+  rotate: false
+  xy: 2, 38
+  size: 50, 46
+  orig: 50, 46
+  offset: 0, 0
+  index: -1

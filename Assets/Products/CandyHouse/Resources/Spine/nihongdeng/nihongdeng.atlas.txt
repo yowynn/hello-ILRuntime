@@ -1,0 +1,13 @@
+
+nihongdeng.png
+size: 211,211
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tangguowu_g
+  rotate: false
+  xy: 1, 154
+  size: 209, 56
+  orig: 209, 56
+  offset: 0, 0
+  index: -1

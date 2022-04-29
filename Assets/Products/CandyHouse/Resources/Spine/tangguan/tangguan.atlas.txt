@@ -1,0 +1,69 @@
+
+tangguan.png
+size: 664,664
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+a_gaizi_hou
+  rotate: true
+  xy: 190, 17
+  size: 341, 154
+  orig: 343, 156
+  offset: 1, 1
+  index: -1
+a_gaizi_qian
+  rotate: true
+  xy: 1, 17
+  size: 341, 188
+  orig: 343, 190
+  offset: 1, 1
+  index: -1
+a_guanzi_hou
+  rotate: false
+  xy: 1, 359
+  size: 399, 304
+  orig: 401, 306
+  offset: 1, 1
+  index: -1
+a_guanzi_qian
+  rotate: true
+  xy: 401, 263
+  size: 400, 262
+  orig: 402, 264
+  offset: 1, 1
+  index: -1
+a_tang1
+  rotate: false
+  xy: 561, 167
+  size: 98, 95
+  orig: 101, 97
+  offset: 2, 1
+  index: -1
+a_tang2
+  rotate: false
+  xy: 561, 94
+  size: 98, 72
+  orig: 100, 74
+  offset: 1, 1
+  index: -1
+a_tang3
+  rotate: true
+  xy: 453, 151
+  size: 111, 107
+  orig: 113, 109
+  offset: 1, 1
+  index: -1
+a_tang4
+  rotate: false
+  xy: 345, 132
+  size: 107, 130
+  orig: 109, 133
+  offset: 1, 2
+  index: -1
+a_tang5
+  rotate: false
+  xy: 345, 14
+  size: 116, 117
+  orig: 118, 119
+  offset: 1, 1
+  index: -1

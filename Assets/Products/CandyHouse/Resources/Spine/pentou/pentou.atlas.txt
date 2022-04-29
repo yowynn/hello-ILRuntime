@@ -1,0 +1,27 @@
+
+pentou.png
+size: 203,203
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+pao
+  rotate: false
+  xy: 1, 73
+  size: 124, 129
+  orig: 124, 129
+  offset: 0, 0
+  index: -1
+pao_xing
+  rotate: false
+  xy: 1, 1
+  size: 73, 71
+  orig: 73, 71
+  offset: 0, 0
+  index: -1
+paozhua
+  rotate: true
+  xy: 126, 59
+  size: 143, 36
+  orig: 147, 39
+  offset: 2, 2
+  index: -1

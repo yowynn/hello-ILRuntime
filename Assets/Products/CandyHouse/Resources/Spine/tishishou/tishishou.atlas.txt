@@ -1,0 +1,41 @@
+
+tishishou.png
+size: 405,405
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+GQ_1
+  rotate: false
+  xy: 174, 1
+  size: 129, 129
+  orig: 224, 235
+  offset: 49, 57
+  index: -1
+GQ_2
+  rotate: false
+  xy: 222, 254
+  size: 149, 150
+  orig: 224, 235
+  offset: 39, 47
+  index: -1
+GQ_3
+  rotate: false
+  xy: 1, 9
+  size: 172, 173
+  orig: 224, 235
+  offset: 26, 36
+  index: -1
+GQ_4
+  rotate: false
+  xy: 1, 183
+  size: 220, 221
+  orig: 224, 235
+  offset: 2, 12
+  index: -1
+zhiyinshou
+  rotate: true
+  xy: 222, 131
+  size: 122, 134
+  orig: 122, 134
+  offset: 0, 0
+  index: -1

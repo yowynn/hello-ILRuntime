@@ -1,0 +1,90 @@
+
+texiao.png
+size: 690,690
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+baozhag1
+  rotate: false
+  xy: 389, 326
+  size: 89, 89
+  orig: 102, 102
+  offset: 7, 6
+  index: -1
+baozhag2
+  rotate: false
+  xy: 480, 343
+  size: 76, 72
+  orig: 80, 77
+  offset: 2, 3
+  index: -1
+baozhag3
+  rotate: false
+  xy: 558, 324
+  size: 130, 125
+  orig: 138, 128
+  offset: 4, 1
+  index: -1
+baozhag4
+  rotate: true
+  xy: 491, 127
+  size: 187, 178
+  orig: 191, 182
+  offset: 2, 2
+  index: -1
+baozhag5
+  rotate: false
+  xy: 257, 73
+  size: 232, 223
+  orig: 239, 227
+  offset: 2, 2
+  index: -1
+jishuban
+  rotate: true
+  xy: 547, 451
+  size: 237, 122
+  orig: 237, 122
+  offset: 0, 0
+  index: -1
+xuanzhuan_g2
+  rotate: true
+  xy: 480, 316
+  size: 25, 26
+  orig: 31, 32
+  offset: 3, 3
+  index: -1
+xuanzhuan_g3
+  rotate: false
+  xy: 544, 79
+  size: 46, 46
+  orig: 52, 52
+  offset: 3, 3
+  index: -1
+xuanzhuan_g4
+  rotate: false
+  xy: 491, 74
+  size: 51, 51
+  orig: 59, 60
+  offset: 4, 5
+  index: -1
+xuanzhuan_g5
+  rotate: true
+  xy: 2, 45
+  size: 251, 253
+  orig: 253, 255
+  offset: 1, 1
+  index: -1
+xuanzhuan_g6
+  rotate: true
+  xy: 389, 417
+  size: 271, 156
+  orig: 277, 160
+  offset: 3, 2
+  index: -1
+xuanzhuan_g7
+  rotate: false
+  xy: 2, 298
+  size: 385, 390
+  orig: 463, 441
+  offset: 39, 39
+  index: -1

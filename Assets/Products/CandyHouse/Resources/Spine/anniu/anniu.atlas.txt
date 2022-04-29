@@ -1,0 +1,83 @@
+
+anniu.png
+size: 563,563
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+anniu1
+  rotate: false
+  xy: 385, 474
+  size: 88, 88
+  orig: 91, 91
+  offset: 1, 2
+  index: -1
+anniu1_anxia
+  rotate: false
+  xy: 474, 474
+  size: 88, 88
+  orig: 91, 91
+  offset: 1, 2
+  index: -1
+anniu2
+  rotate: true
+  xy: 1, 417
+  size: 88, 90
+  orig: 92, 93
+  offset: 2, 2
+  index: -1
+anniu2_anxia
+  rotate: true
+  xy: 92, 417
+  size: 88, 90
+  orig: 92, 93
+  offset: 2, 2
+  index: -1
+anniu3
+  rotate: false
+  xy: 211, 476
+  size: 86, 86
+  orig: 90, 88
+  offset: 2, 1
+  index: -1
+anniu3_anxia
+  rotate: false
+  xy: 298, 476
+  size: 86, 86
+  orig: 90, 88
+  offset: 2, 1
+  index: -1
+anniu4
+  rotate: false
+  xy: 365, 384
+  size: 90, 89
+  orig: 94, 92
+  offset: 2, 2
+  index: -1
+anniu4_anxia
+  rotate: false
+  xy: 456, 384
+  size: 90, 89
+  orig: 94, 92
+  offset: 2, 2
+  index: -1
+anniu5
+  rotate: true
+  xy: 183, 387
+  size: 88, 90
+  orig: 92, 92
+  offset: 2, 1
+  index: -1
+anniu5_anxia
+  rotate: true
+  xy: 274, 387
+  size: 88, 90
+  orig: 92, 92
+  offset: 2, 1
+  index: -1
+tangguowu_g
+  rotate: false
+  xy: 1, 506
+  size: 209, 56
+  orig: 209, 56
+  offset: 0, 0
+  index: -1
