@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 348928219}
-  - component: {fileID: 348928220}
+  - component: {fileID: 348928221}
   m_Layer: 0
   m_Name: TestObject
   m_TagString: Untagged
@@ -152,7 +152,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &348928220
+--- !u!114 &348928221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,9 +161,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 348928218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9434ab67851724942b04b46a44e8ce52, type: 3}
+  m_Script: {fileID: 11500000, guid: c521c2152f38bf440a0984e5949c092c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ILType: Assets.Products.ILRuntimeTest.SerializingTest
+  ILData:
+    Nodes:
+    - Name: m_Script
+      Tag: 5
+      Value:
+        rawX: 0
+        rawY: 0
+    - Name: aaa
+      Tag: 1001
+      Value:
+        rawX: 3
+        rawY: 0
+    - Name: data
+      Tag: 0
+      Value:
+        rawX: 666
+        rawY: 0
+    - Name: data
+      Tag: 0
+      Value:
+        rawX: 666
+        rawY: 0
+    - Name: data
+      Tag: 0
+      Value:
+        rawX: 9999
+        rawY: 0
+    Strings: []
+    Objects:
+    - {fileID: 11500000, guid: 9434ab67851724942b04b46a44e8ce52, type: 3}
+    Curves: []
 --- !u!1 &750103527
 GameObject:
   m_ObjectHideFlags: 0

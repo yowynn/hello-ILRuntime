@@ -15,7 +15,7 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour.Editor
         {
             //ILAPP.GetInstance().gameObject.
             agent = (ILAgent)target;
-            var type = Type.GetType(agent.ILType);
+            var type = ILAPP.GetOriginType(agent.ILType);
             var so = ScriptableObject.CreateInstance(type);
             ILAgentUtil.WhiteToScriptableObject(agent, so);
             origin = CreateEditor(so);
@@ -31,7 +31,8 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour.Editor
             GUI.enabled = true;
 
             EditorGUI.BeginChangeCheck();
-            //origin.OnInspectorGUI();
+            origin.OnInspectorGUI();
+            EditorGUILayout.LabelField("Name", agent.ILType, new GUILayoutOption[] { });
             if (EditorGUI.EndChangeCheck())
             {
                 //ILData.SaveSerializedObject(editor.serializedObject, ilbehaviour.IL_ARGS);

@@ -14,10 +14,7 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
 
         public override object CreateCLRInstance(ILRuntime.Runtime.Enviorment.AppDomain appdomain, ILTypeInstance instance)
         {
-            return new ILAgent()
-            {
-                ILInstance = instance,
-            };
+            return new ILAgent(instance);
         }
     }
 }

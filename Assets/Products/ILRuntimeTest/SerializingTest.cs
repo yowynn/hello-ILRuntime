@@ -14,8 +14,8 @@ namespace Assets.Products.ILRuntimeTest
         // Use this for initialization
         private void Start()
         {
-            ILAPP app = ILAPP.GetInstance();
-            print("helllodddddddddddddddddd");
+            //ILAPP app = ILAPP.GetInstance();
+            print("SerializingTest.Start");
         }
 
         // Update is called once per frame
@@ -26,7 +26,7 @@ namespace Assets.Products.ILRuntimeTest
         [ExecuteInEditMode]
         private void OnEnable()
         {
-            //Test();
+            print($"SerializingTest.OnEnable -- {aaa[2]}");
         }
 
         private void Test()

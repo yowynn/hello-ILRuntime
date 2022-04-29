@@ -11,34 +11,82 @@ namespace Assets.ILRuntimeShell
 {
     public class ILAPP : MonoBehaviour
     {
-        private static ILAPP instance;
+        private static ILAPP currentInstance;
 
-        public static ILAPP GetInstance()
+        private static AppDomain currentDomain;
+
+        public static ILAPP CurrentInstance
         {
-            if (instance != null)
-                return instance;
-            else
+            get
             {
-                GameObject go = new GameObject();
-                instance = go.AddComponent<ILAPP>();
-                go.hideFlags = HideFlags.DontSave;
-                go.name = typeof(ILAPP).Name;
-                instance.Initialize();
-                return instance;
+                if (currentInstance != null)
+                    return currentInstance;
+                else
+                {
+                    throw new System.Exception("[ILAPP]Current APP not found");
+                }
             }
         }
 
-        public static IType GetType(string typeName)
+        public static AppDomain CurrentDomain
         {
-            return GetInstance().domain.GetType(typeName);
+            get
+            {
+                if (currentDomain != null)
+                {
+                    return currentDomain;
+                }
+                else
+                {
+#if UNITY_EDITOR
+                    currentDomain = CreateDefaultDomain();
+                    return currentDomain;
+#endif
+                    throw new System.Exception("[ILAPP]Current Domain not found");
+                }
+            }
         }
 
-        public static AppDomain AppDomain => GetInstance().domain;
+        public static IType GetILRuntimeType(string typeName)
+        {
+            return CurrentDomain.GetType(typeName);
+        }
+
+        public static System.Type GetOriginType(string typeName)
+        {
+            var originDomain = System.AppDomain.CurrentDomain;
+            var assemblies = originDomain.GetAssemblies();
+            foreach (var assembly in assemblies)
+            {
+                var type = assembly.GetType(typeName);
+                if (type != null)
+                    return type;
+            }
+            return null;
+        }
 
         private AppDomain domain;
 
+        public AppDomain AppDomain
+        {
+            get
+            {
+                return domain;
+            }
+        }
+
         private ILAPP()
         {
+            domain = new AppDomain();
+        }
+
+        public void SetCurrent()
+        {
+            var domain = this?.domain;
+            if (domain == null)
+                throw new System.Exception("[ILAPP]SetCurrent unavailable ILAPP");
+            currentInstance = this;
+            currentDomain = domain;
         }
 
         private void Awake()
@@ -54,31 +102,14 @@ namespace Assets.ILRuntimeShell
 
         public void Initialize(bool reset = false)
         {
-            print($"[ILAPP.Initialize]{domain == null}");
-            if (domain != null && !reset)
-                return;
-            domain = new AppDomain();
-            RegisterBindings();
-            StartCoroutine(LoadAssemblies());
+            if (reset)
+                domain = new AppDomain();
+            RegisterBindings(domain);
+            RegisterCLRMethodRedirections(domain);
+            // TODO load Assemblies
         }
 
-        public IEnumerator LoadAssemblies()
-        {
-#if UNITY_EDITOR
-            var findPath = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Library/ScriptAssemblies/");
-            string[] files = Directory.GetFiles(findPath, "Product.*.dll", SearchOption.TopDirectoryOnly);
-            foreach (string path in files)
-            {
-                var dllpath = path;
-                var pdbpath = Path.ChangeExtension(path, ".pdb");
-                LoadAssemblyLocal(dllpath, pdbpath);
-                //yield return StartCoroutine(LoadAssembly("file://" + dllpath, File.Exists(pdbpath) ? ("file://" + pdbpath) : null));
-            }
-            yield return null;
-#endif
-        }
-
-        public void LoadAssemblyLocal(string dllpath, string pdbpath = null)
+        public static void LoadAssemblyLocal(AppDomain domain, string dllpath, string pdbpath = null)
         {
             byte[] dlldata = null, pdbdata = null;
             dlldata = File.ReadAllBytes(dllpath);
@@ -91,12 +122,11 @@ namespace Assets.ILRuntimeShell
             {
                 domain.LoadAssembly(new MemoryStream(dlldata));
             }
-            print($"LoadAssemblyFinish: {dllpath}: {dlldata?.Length} & {pdbpath}: {pdbdata?.Length}");
+            Debug.Log($"LoadAssemblyLocalFinish: {dllpath}: {dlldata?.Length} & {pdbpath}: {pdbdata?.Length}");
         }
 
-        public IEnumerator LoadAssembly(string dllurl, string pdburl = null)
+        public static IEnumerator LoadAssemblyRemote(AppDomain domain, string dllurl, string pdburl = null)
         {
-            //print($"LoadAssembly: {dllurl} : {pdburl}");
             byte[] dlldata = null, pdbdata = null;
             using (UnityWebRequest uwr = new UnityWebRequest(dllurl))
             {
@@ -126,16 +156,41 @@ namespace Assets.ILRuntimeShell
             {
                 domain.LoadAssembly(new MemoryStream(dlldata));
             }
-            print($"LoadAssemblyFinish: {dllurl} : {pdburl}");
+            Debug.Log($"LoadAssemblyRemoteFinish: {dllurl} : {pdburl}");
         }
 
-        public void RegisterBindings()
+        public static void RegisterBindings(AppDomain domain)
         {
             domain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());
             domain.RegisterValueTypeBinder(typeof(Vector2), new Vector2Binder());
             domain.RegisterValueTypeBinder(typeof(Quaternion), new QuaternionBinder());
 
             domain.RegisterCrossBindingAdaptor(new Adapters.MonoBehaviour.ILAdapter());
+        }
+
+        public static void RegisterCLRMethodRedirections(AppDomain domain)
+        {
+            Adapters.MonoBehaviour.ILAgentUtil.RegisterCLRMethodRedirections(domain);
+        }
+
+        private static AppDomain CreateDefaultDomain()
+        {
+#if UNITY_EDITOR
+            var appDomain = new AppDomain();
+            RegisterBindings(appDomain);
+            RegisterCLRMethodRedirections(appDomain);
+            var findPath = Path.Combine(Path.GetDirectoryName(Application.dataPath), "Library/ScriptAssemblies/");
+            string[] files = Directory.GetFiles(findPath, "Product.*.dll", SearchOption.TopDirectoryOnly);
+            foreach (string path in files)
+            {
+                var dllpath = path;
+                var pdbpath = Path.ChangeExtension(path, ".pdb");
+                LoadAssemblyLocal(appDomain, dllpath, pdbpath);
+            }
+            Debug.LogWarning($"[ILAPP]CreateDefaultDomain in DEBUG!!!");
+            return appDomain;
+#endif
+            throw new System.Exception("Debug Method");
         }
     }
 }

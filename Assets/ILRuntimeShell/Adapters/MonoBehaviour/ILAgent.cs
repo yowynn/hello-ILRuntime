@@ -1,4 +1,5 @@
 ﻿using ILRuntime.CLR.Method;
+using ILRuntime.CLR.TypeSystem;
 using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
 using System.Collections;
@@ -6,23 +7,64 @@ using UnityEngine;
 
 namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
 {
-    public class ILAgent : UnityEngine.MonoBehaviour, CrossBindingAdaptorType
+    public class ILAgent : UnityEngine.MonoBehaviour, CrossBindingAdaptorType, ISerializationCallbackReceiver
     {
-        public ILTypeInstance ILInstance { get; set; }
+        private ILTypeInstance iLTypeInstance;
 
         public string ILType;
 
         public ILData ILData;
 
-        //// Use this for initialization
-        //private void Start()
-        //{
-        //}
+        public ILTypeInstance ILInstance
+        {
+            get
+            {
+                if (iLTypeInstance == null)
+                {
+                    var type = ILAPP.GetILRuntimeType(this.ILType);
+                    var iltype = type as ILType;
+                    if (iltype == null)
+                        throw new System.Exception("[ILAgent]can not find IL type");
+                    var instance = iltype.Instantiate();
+                    instance.CLRInstance = this;
+                    ILInstance = instance;
+                    ILAgentUtil.ILDeserialize(ILInstance, ILData);
+                }
+                return iLTypeInstance;
+            }
 
-        //// Update is called once per frame
-        //private void Update()
-        //{
-        //}
+            set
+            {
+                iLTypeInstance = value;
+            }
+        }
+
+        public ILAgent(ILTypeInstance instance)
+        {
+            ILInstance = instance;
+        }
+
+        public ILAgent()
+        {
+            //Debug.Log($"?????????????????????????????????????ddd???????????????{ILType}");
+        }
+
+        public void OnBeforeSerialize()
+        {
+            //throw new System.NotImplementedException();
+            //if (ILInstance == null)
+            //{
+            //    ILInstance
+            //}
+            //Debug.Log($"?????????????????????????????????????ddd???????????????11111{ILType}");
+        }
+
+        public void OnAfterDeserialize()
+        {
+            //throw new System.NotImplementedException();
+            //ILAgentUtil.ILDeserialize(ILInstance, ILData);
+            //Debug.Log("DDDDDDDDDDDDDDDDDD");
+        }
 
         public void CallInitialUnityMessage()
         {
@@ -64,7 +106,7 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
             IMethod method = GetAdapterMethod(name, args.Length);
             if (method != null)
             {
-                ILAPP.AppDomain.Invoke(method, ILInstance, args);
+                ILAPP.CurrentDomain.Invoke(method, ILInstance, args);
             }
         }
 
@@ -73,7 +115,7 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
             IMethod method = GetAdapterMethod(name);
             if (method != null)
             {
-                ILAPP.AppDomain.Invoke(method, ILInstance, null);
+                ILAPP.CurrentDomain.Invoke(method, ILInstance, null);
             }
         }
 
@@ -208,7 +250,10 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
         { CallAdapterMethod("Update"); }
 
         private void Awake()
-        { CallAdapterMethod("Awake"); }
+        {
+            CallAdapterMethod("Awake");
+            print("AWAKEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+        }
 
         //void OnValidate() { CallAdapterMethod("OnValidate"); }
 
@@ -245,27 +290,27 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
             switch (methodType)
             {
                 case 1:
-                    ILAPP.AppDomain.Invoke(methodFunc, ILInstance, ev.stringParameter);
+                    ILAPP.CurrentDomain.Invoke(methodFunc, ILInstance, ev.stringParameter);
                     break;
 
                 case 2:
-                    ILAPP.AppDomain.Invoke(methodFunc, ILInstance, ev.intParameter);
+                    ILAPP.CurrentDomain.Invoke(methodFunc, ILInstance, ev.intParameter);
                     break;
 
                 case 3:
-                    ILAPP.AppDomain.Invoke(methodFunc, ILInstance, ev.floatParameter);
+                    ILAPP.CurrentDomain.Invoke(methodFunc, ILInstance, ev.floatParameter);
                     break;
 
                 case 4:
-                    ILAPP.AppDomain.Invoke(methodFunc, ILInstance, ev.objectReferenceParameter);
+                    ILAPP.CurrentDomain.Invoke(methodFunc, ILInstance, ev.objectReferenceParameter);
                     break;
 
                 case 5:
-                    ILAPP.AppDomain.Invoke(methodFunc, ILInstance, ev);
+                    ILAPP.CurrentDomain.Invoke(methodFunc, ILInstance, ev);
                     break;
 
                 case 6:
-                    ILAPP.AppDomain.Invoke(methodFunc, ILInstance, null);
+                    ILAPP.CurrentDomain.Invoke(methodFunc, ILInstance, null);
                     break;
 
                 default:
@@ -278,5 +323,15 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
                     break;
             }
         }
+
+        // TODO
+        private void AnimatorEvent(string EventName)
+        { CallAdapterMethod("AnimatorEvent", EventName); }
+
+        private void SoundEvent(string EventName)
+        { CallAdapterMethod("SoundEvent", EventName); }
+
+        private void GameEnd()
+        { CallAdapterMethod("GameEnd"); }
     }
 }
