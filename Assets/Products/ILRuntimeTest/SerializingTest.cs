@@ -11,6 +11,8 @@ namespace Assets.Products.ILRuntimeTest
     {
         public List<int> aaa;
 
+        public SerializingTest test;
+
         // Use this for initialization
         private void Start()
         {

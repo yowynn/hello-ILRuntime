@@ -21,10 +21,12 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour
             {
                 if (iLTypeInstance == null)
                 {
+                    if (this.ILType == null)
+                        return null;
                     var type = ILAPP.GetILRuntimeType(this.ILType);
                     var iltype = type as ILType;
                     if (iltype == null)
-                        throw new System.Exception("[ILAgent]can not find IL type");
+                        throw new System.Exception($"[ILAgent]can not find IL type: {this.ILType == null}");
                     var instance = iltype.Instantiate();
                     instance.CLRInstance = this;
                     ILInstance = instance;

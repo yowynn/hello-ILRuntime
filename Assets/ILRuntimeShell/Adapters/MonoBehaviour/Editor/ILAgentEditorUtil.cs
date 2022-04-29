@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,9 +53,32 @@ namespace Assets.ILRuntimeShell.Adapters.MonoBehaviour.Editor
         [MenuItem("ILRuntime/ReplaceMonoBehaviours")]
         private static void ReplaceMonoBehaviours()
         {
+            //Debug.Log(Selection.GetFiltered<UnityEngine.MonoBehaviour>(SelectionMode.Unfiltered).Length);
+            //var path = "";
+            //var obj = Selection.activeObject;
+            //if (obj == null) path = "Assets";
+            //else path = AssetDatabase.GetAssetPath(obj.GetInstanceID());
+            //Debug.Log($"Not in assets folddddddd:::::{path}");
+            //if (path.Length > 0)
+            //{
+            //    if (Directory.Exists(path))
+            //    {
+            //        Debug.Log("Folder");
+            //    }
+            //    else
+            //    {
+            //        Debug.Log("File");
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.Log("Not in assets folder");
+            //}
+            //return;
             HashSet<string> prefabs = new HashSet<string>();
             foreach (var comp in Resources.FindObjectsOfTypeAll<UnityEngine.MonoBehaviour>())
             {
+                //Debug.Log($"DDDDDDD{comp.gameObject}");
                 if (comp.hideFlags == HideFlags.NotEditable || comp.hideFlags == HideFlags.HideAndDontSave)
                     continue;
                 GameObject go = comp.gameObject;
